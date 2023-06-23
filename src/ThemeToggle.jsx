@@ -2,7 +2,7 @@ import { useGlobalContext } from './Context'
 import { BsFillSunFill, BsFillMoonFill } from 'react-icons/bs'
 const ThemeToggle = () => {
   const { isDarkTheme, toggleDarkTheme } = useGlobalContext()
-  console.log(toggleDarkTheme)
+
   return (
     <section className="toggle-container">
       <label className="ui-switch">

@@ -6,13 +6,14 @@ const url = `https://api.unsplash.com/search/photos?client_id=${
   import.meta.env.VITE_API_KEY
 }`
 const Gallery = () => {
-  const { searchTerm } = useGlobalContext()
-  console.log(searchTerm)
+  const { searchTerm, handleNext, nextPage } = useGlobalContext()
   const response = useQuery({
     ///Important----->
-    queryKey: ['images', searchTerm],
+    queryKey: ['images', searchTerm, nextPage],
     queryFn: async () => {
-      const result = await axios.get(url + `&query=${searchTerm}`)
+      const result = await axios.get(
+        url + `&query=${searchTerm}&page=${nextPage}`
+      )
       return result.data
     },
   })
@@ -31,7 +32,6 @@ const Gallery = () => {
     )
   }
   if (response.isError) {
-    console.log(response.error)
     return (
       <h1 style={{ marginLeft: '33%', marginTop: '125px' }}>
         {response.error.code}
@@ -56,6 +56,12 @@ const Gallery = () => {
           />
         )
       })}
+      <button className="button" style={{ margin: 'auto' }}>
+        <span className="button-content" onClick={handleNext}>
+          Next
+        </span>
+        {console.log(nextPage)}
+      </button>
     </div>
   )
 }

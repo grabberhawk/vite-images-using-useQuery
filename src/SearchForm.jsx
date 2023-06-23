@@ -3,7 +3,6 @@ import { useGlobalContext } from './Context'
 
 const SearchForm = () => {
   const { setSearchTerm } = useGlobalContext()
-  const [value, setValue] = useState(null)
   const handleSearch = (event) => {
     event.preventDefault()
     const searchValue = event.target.elements.search.value
